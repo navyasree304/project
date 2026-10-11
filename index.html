@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Nellore Home Bakery — 3D website">
+<title>Nellore Home Bakery — 3D</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{--brown:#7a3e1d;--brown2:#8b4513;--pink:#d96c87;--cream:#fff8f2;--glass:#ffffff18}
+body{font-family:Inter,Arial,sans-serif;background:#fffaf7;color:#33251f;line-height:1.6;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+radial-gradient(circle at 10% 10%,#ffd9c655,transparent 30%),
+radial-gradient(circle at 90% 20%,#f7b8cb44,transparent 28%),
+linear-gradient(135deg,#fffaf7,#fff0e7)}
+header{position:sticky;top:0;z-index:50;background:#fff8f2dd;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff99;padding:14px 5%;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:900;color:var(--brown)}.logo span{color:var(--pink)}
+nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}nav a{color:#49372f;text-decoration:none;font-weight:800;font-size:14px}
+button,.primary{border:0;cursor:pointer;font-weight:800}
+.cart-button,.primary{background:linear-gradient(135deg,#8b4513,#b35c28);color:#fff;border-radius:28px;padding:11px 18px;box-shadow:0 10px 22px #8b451344}
+.hero{min-height:78vh;padding:70px 6%;display:grid;place-items:center;position:relative;perspective:1200px}
+.hero-content{max-width:850px;text-align:center;position:relative;z-index:2}
+.badge{display:inline-block;padding:8px 15px;border-radius:999px;background:#fff8;border:1px solid #fff;box-shadow:0 10px 30px #8b45131a;font-weight:800;color:var(--brown);margin-bottom:18px}
+.hero h1{font-size:clamp(42px,8vw,82px);line-height:1.03;color:var(--brown);text-shadow:0 8px 24px #7a3e1d18}
+.hero h1 span{color:var(--pink)}
+.hero p{font-size:19px;color:#6d5c53;margin:22px 0 30px}
+.hero-buttons a{display:inline-block;margin:5px;padding:14px 25px;border-radius:30px;text-decoration:none;font-weight:800}
+.secondary{color:var(--brown);background:#fff9;border:2px solid var(--brown)}
+.floating{position:absolute;filter:drop-shadow(0 25px 18px #5d2b1b30);animation:float 5s ease-in-out infinite;transform-style:preserve-3d}
+.cake3d{width:190px;height:150px;right:8%;top:15%;transform:rotateY(-18deg) rotateX(10deg)}
+.cake3d .cake{position:absolute;left:25px;right:25px;bottom:20px;height:75px;border-radius:15px 15px 28px 28px;background:linear-gradient(#9b4b25,#6c2f17);box-shadow:inset 0 12px #f5c4bd,inset 0 -10px #4c2112;transform:skewY(-4deg)}
+.cake3d:before{content:"🍓";font-size:62px;position:absolute;z-index:3;left:56px;top:4px;transform:translateZ(50px)}
+.cup3d{width:120px;height:120px;left:8%;bottom:14%;font-size:82px;transform:rotateY(20deg) rotateZ(-8deg);animation-delay:-2s}
+@keyframes float{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -18px;rotate:3deg}}
+.section{padding:75px 6%;position:relative}.title{text-align:center;margin-bottom:38px}.title h2{font-size:38px;color:var(--brown)}.title p{color:#7b6c63}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:28px;max-width:1200px;margin:auto}
+.product{background:linear-gradient(145deg,#ffffff,#fff1e9);border:1px solid #ffffff;min-height:330px;border-radius:24px;overflow:hidden;box-shadow:0 20px 45px #6c301b18;transform-style:preserve-3d;transition:transform .35s,box-shadow .35s}
+.product:hover{transform:perspective(900px) rotateX(5deg) rotateY(-7deg) translateY(-10px);box-shadow:0 30px 60px #6c301b2b}
+.product-image{height:185px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#fff,#f5d8c9);font-size:86px;transform:translateZ(30px);text-shadow:0 15px 15px #6c301b25}
+.product-content{padding:20px;transform:translateZ(20px)}.product h3{color:var(--brown);font-size:21px}.product p{font-size:14px;color:#766860;margin:6px 0 14px}.price{font-size:20px;font-weight:900;color:var(--pink)}
+.add-btn{float:right;background:var(--brown2);color:#fff;padding:9px 16px;border-radius:22px;box-shadow:0 7px 15px #8b451333}
+.about{background:linear-gradient(135deg,#fff0e8cc,#fff9f5aa);border-top:1px solid #fff}.about-content,.cart-box,.order-form{max-width:900px;margin:auto}
+.about-content{text-align:center}.about-content p{margin:12px;color:#5f514a;font-size:17px}
+.glass{background:#ffffffb8;backdrop-filter:blur(14px);border:1px solid #fff;border-radius:24px;box-shadow:0 20px 50px #6c301b18}
+.cart-box,.order-form{padding:28px}.cart-item{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #eaded7;gap:10px}.qty{display:flex;align-items:center;gap:8px}.qty button{width:31px;height:31px;border-radius:50%;background:var(--brown2);color:#fff}.remove{border:0;background:#f3d9d9;color:#9b2e2e;padding:7px 11px;border-radius:14px}.total{text-align:right;font-size:25px;font-weight:900;color:var(--brown);margin-top:20px}
+.form-group{margin-bottom:16px}.form-group label{display:block;font-weight:800;margin-bottom:6px;color:#5c4d45}.form-group input,.form-group textarea,.form-group select{width:100%;padding:13px;border:1px solid #dfd1c8;background:#fff9;border-radius:12px;font-size:15px;outline:none}.form-group textarea{min-height:90px;resize:vertical}.place-order{width:100%;padding:15px;border-radius:30px;background:linear-gradient(135deg,#25d366,#16ad52);color:#fff;font-size:17px;box-shadow:0 12px 25px #25d36633}
+.contact{background:linear-gradient(135deg,#7a3e1d,#4b2412);color:#fff;text-align:center}.contact h2{margin-bottom:12px}.contact p{opacity:.92}
+footer{background:#32170c;color:#fff;text-align:center;padding:20px}.toast{position:fixed;right:18px;bottom:18px;background:#2d211c;color:#fff;padding:12px 17px;border-radius:12px;display:none;z-index:100;box-shadow:0 10px 30px #0004}
+@media(max-width:760px){header{flex-direction:column;gap:10px}nav{justify-content:center;gap:9px}.hero{min-height:72vh}.cake3d{right:-20px;top:12%;transform:scale(.7)}.cup3d{left:-10px;bottom:10%;transform:scale(.7)}.cart-item{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Nellore <span>Lucky Bakery</span></div>
+  <nav><a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#order">Order</a>
+  <button class="cart-button" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Cart (<span id="cartCount">0</span>)</button></nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="floating cake3d"><div class="cake"></div></div>
+  <div class="floating cup3d">🧁</div>
+  <div class="hero-content">
+    <div class="badge">✨ Freshly baked in Nellore</div>
+    <h1>Nellore <span>Lucky Bakery</span></h1>
+    <p>Freshly baked with love ❤️<br>Homemade cakes, pastries, cookies & desserts.</p>
+    <div class="hero-buttons"><a href="#menu" class="primary">Explore Menu</a><a href="#order" class="secondary">Place Order</a></div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="title"><h2>Our Delicious Menu</h2><p>Move over the cards — they lift in 3D.</p></div>
+  <div class="products" id="products"></div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-content glass" style="padding:32px">
+    <div class="title"><h2>About Nellore Lucky Bakery</h2></div>
+    <p>Nellore Lucky Bakery is a small home-based bakery dedicated to making fresh, delicious and hygienic homemade cakes and desserts.</p>
+    <p>Every order is prepared with care using quality ingredients and lots of love.</p>
+  </div>
+</section>
+
+<section class="section" id="cart">
+  <div class="title"><h2>Your Cart</h2><p>Review your order before placing it.</p></div>
+  <div class="cart-box glass"><div id="cartItems"><p style="text-align:center;color:#777">Your cart is empty.</p></div><div class="total">Total: ₹<span id="cartTotal">0</span></div></div>
+</section>
+
+<section class="section" id="order">
+  <div class="title"><h2>Place Your Order</h2><p>Enter your details and send your order on WhatsApp.</p></div>
+  <div class="order-form glass">
+    <div class="form-group"><label>Customer Name *</label><input id="customerName" placeholder="Enter your name"></div>
+    <div class="form-group"><label>Mobile Number *</label><input id="customerPhone" type="tel" placeholder="Enter mobile number"></div>
+    <div class="form-group"><label>Delivery Address *</label><textarea id="customerAddress" placeholder="Enter complete delivery address"></textarea></div>
+    <div class="form-group"><label>Order Type</label><select id="orderType"><option>Home Delivery</option><option>Store/Home Pickup</option></select></div>
+    <div class="form-group"><label>Preferred Date</label><input id="orderDate" type="date"></div>
+    <div class="form-group"><label>Preferred Time</label><input id="orderTime" type="time"></div>
+    <div class="form-group"><label>Special Instructions</label><textarea id="instructions" placeholder="Cake message, flavour, customisation, etc."></textarea></div>
+    <button class="place-order" onclick="placeOrder()">📱 Place Order on WhatsApp</button>
+  </div>
+</section>
+
+<section class="section contact" id="contact"><h2>Contact Nellore Lucky Bakery</h2><p>📞 Phone: +91 XXXXXXXXXX</p><p>📍 Nellore, Andhra Pradesh</p><p>📱 WhatsApp Orders Available</p></section>
+<footer>©️ 2026 Nellore Lucky Bakery. All Rights Reserved.</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const products=[
+{name:"Chocolate Cake",price:499,icon:"🎂",desc:"Rich and delicious homemade chocolate cake."},
+{name:"Black Forest Cake",price:599,icon:"🍰",desc:"Soft chocolate sponge with cream and cherries."},
+{name:"Cupcakes",price:80,icon:"🧁",desc:"Soft, creamy and freshly baked cupcakes."},
+{name:"Chocolate Cookies",price:150,icon:"🍪",desc:"Homemade crunchy chocolate cookies."},
+{name:"Strawberry Cake",price:549,icon:"🍓",desc:"Fresh strawberry cream cake."},
+{name:"Donuts",price:70,icon:"🍩",desc:"Soft homemade donuts with delicious toppings."}];
+let cart=[];
+function renderProducts(){document.getElementById("products").innerHTML=products.map(p=>`
+<div class="product"><div class="product-image">${p.icon}</div><div class="product-content">
+<h3>${p.name}</h3><p>${p.desc}</p><span class="price">₹${p.price}</span>
+<button class="add-btn" onclick="addToCart('${p.name}',${p.price})">Add</button></div></div>`).join("")}
+function addToCart(name,price){let item=cart.find(x=>x.name===name);if(item)item.quantity++;else cart.push({name,price,quantity:1});updateCart();showToast(name+" added to cart");document.getElementById("cart").scrollIntoView({behavior:"smooth"})}
+function changeQty(i,d){cart[i].quantity+=d;if(cart[i].quantity<=0)cart.splice(i,1);updateCart()}
+function removeItem(i){cart.splice(i,1);updateCart()}
+function updateCart(){const box=document.getElementById("cartItems");if(!cart.length){box.innerHTML='<p style="text-align:center;color:#777">Your cart is empty.</p>';document.getElementById("cartCount").textContent=0;document.getElementById("cartTotal").textContent=0;return}let total=0,count=0;
+box.innerHTML=cart.map((x,i)=>{let t=x.price*x.quantity;total+=t;count+=x.quantity;return `<div class="cart-item"><div><b>${x.name}</b><br><small>₹${x.price} each</small></div><div class="qty"><button onclick="changeQty(${i},-1)">−</button><b>${x.quantity}</b><button onclick="changeQty(${i},1)">+</button><button class="remove" onclick="removeItem(${i})">Remove</button></div><b>₹${t}</b></div>`}).join("");
+document.getElementById("cartCount").textContent=count;document.getElementById("cartTotal").textContent=total}
+function placeOrder(){if(!cart.length){alert("Please add at least one product to your cart.");return}const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),address=document.getElementById("customerAddress").value.trim();if(!name||!phone||!address){alert("Please fill Customer Name, Mobile Number and Delivery Address.");return}
+const total=cart.reduce((s,x)=>s+x.price*x.quantity,0),items=cart.map(x=>`${x.name} x ${x.quantity} = ₹${x.price*x.quantity}`).join("\n");
+const msg=`Hello Nellore Lucky Bakery!%0A%0A*New Order*%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AAddress: ${encodeURIComponent(address)}%0AOrder Type: ${encodeURIComponent(document.getElementById("orderType").value)}%0ADate: ${encodeURIComponent(document.getElementById("orderDate").value||"Not specified")}%0ATime: ${encodeURIComponent(document.getElementById("orderTime").value||"Not specified")}%0A%0AItems:%0A${encodeURIComponent(items)}%0A%0ATotal: ₹${total}%0ASpecial Instructions: ${encodeURIComponent(document.getElementById("instructions").value||"None")}`;
+window.open(`https://wa.me/91987654321?text=${msg}`,"_blank")}
+function showToast(t){const el=document.getElementById("toast");el.textContent=t;el.style.display="block";setTimeout(()=>el.style.display="none",1800)}
+renderProducts();updateCart();
+</script>
+</body>
+</html>
